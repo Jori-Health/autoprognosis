@@ -31,7 +31,15 @@ def find_version() -> str:
 if __name__ == "__main__":
     try:
         setup(
+            name="jori-autoprognosis",
             version=find_version(),
+            description="Test",
+            author="Bryan Kyritz",
+            author_email="bryan@jori.health",
+            url="https://github.com/Jori-Health/autoprognosis",
+            packages=find_packages(where="src"),
+            package_dir={"": "src"},
+            # Add any other necessary configuration options
         )
     except:  # noqa
         print(
