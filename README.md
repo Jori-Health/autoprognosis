@@ -1,4 +1,4 @@
-# AutoPrognosis - A system for automating the design of predictive modeling pipelines tailored for clinical prognosis.
+# Jori AutoPrognosis (FORKED) - A system for automating the design of predictive modeling pipelines tailored for clinical prognosis.
 
 
 <div align="center">
