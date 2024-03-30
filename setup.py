@@ -7,7 +7,7 @@ import os
 import re
 
 # third party
-from setuptools import setup
+from setuptools import setup, find_packages
 
 PKG_DIR = os.path.dirname(os.path.abspath(__file__))
 
