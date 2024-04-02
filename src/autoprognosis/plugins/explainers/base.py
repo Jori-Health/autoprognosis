@@ -46,20 +46,23 @@ class ExplainerPlugin(metaclass=ABCMeta):
         self,
         importances: pd.DataFrame,
         feature_names: Optional[list] = None,
+        save_path: Optional[str] = None,
     ) -> None:
-
         importances = np.asarray(importances)
-
         title = f"{self.name()} importance"
         axis_title = "Features"
-
+    
         if not feature_names:
             feature_names = self.feature_names
-
+    
         x_pos = np.arange(len(feature_names))
-
         plt.figure(figsize=(20, 6))
         plt.bar(x_pos, importances, align="center")
         plt.xticks(x_pos, feature_names, wrap=True)
         plt.xlabel(axis_title)
         plt.title(title)
+    
+        if save_path:
+            plt.savefig(save_path)
+        else:
+            plt.show()
