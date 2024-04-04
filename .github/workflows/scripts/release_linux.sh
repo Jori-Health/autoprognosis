@@ -9,6 +9,7 @@ yum install llvm-toolset-7.0 python3 python3-devel -y
 
 # Python
 python3 -m pip install --upgrade pip
+python3 -m pip install "urllib3<2.0"  # Add this line
 python3 -m pip install setuptools wheel twine auditwheel
 
 # Publish
