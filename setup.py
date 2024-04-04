@@ -32,7 +32,7 @@ if __name__ == "__main__":
     try:
         setup(
             name="jori-autoprognosis",
-            version=find_version(),
+            version="0.1.22",
             description="Test",
             author="Bryan Kyritz",
             author_email="bryan@jori.health",
