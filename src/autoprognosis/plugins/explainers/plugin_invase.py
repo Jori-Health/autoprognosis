@@ -196,7 +196,7 @@ class invaseBase(metaclass=ABCMeta):
             train_loss = []
             for b in range(n_batches):
                 # Select batch
-                idx = train_indices[(b * batch_size) : min((b + 1) * batch_size, n - 1)]
+                idx = train_indices[(b * batch_size): min((b + 1) * batch_size, n - 1)]
                 x_batch = x_train[idx, :]
                 y_batch = y_train[idx]
 
@@ -697,10 +697,14 @@ class INVASEPlugin(ExplainerPlugin):
 
         return np.asarray(result)
 
-    def plot(self, values: pd.DataFrame) -> None:  # type: ignore
+    def plot(self, values: pd.DataFrame, save_path: Optional[str] = None) -> None:  # type: ignore
         values = pd.DataFrame(values, columns=self.feature_names)
         plt.figure(figsize=(20, 6))
         sns.heatmap(values).set_title("invase")
+        if save_path:
+            plt.savefig(save_path)
+        else:
+            plt.show()
 
     @staticmethod
     def name() -> str:

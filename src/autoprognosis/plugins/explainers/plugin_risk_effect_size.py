@@ -173,7 +173,7 @@ class RiskEffectSizePlugin(ExplainerPlugin):
 
         return output
 
-    def plot(self, X: pd.DataFrame, ax: Any = None) -> None:
+    def plot(self, X: pd.DataFrame, ax: Any = None, save_path: Optional[str] = None) -> None:
         output = self._get_population_shifts(self.predict_cbk, X)
         thresh_line = [0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2]
 
@@ -221,6 +221,14 @@ class RiskEffectSizePlugin(ExplainerPlugin):
             ax=ax,
         )
         plot_ax.xaxis.set_ticks_position("top")
+
+        if save_path:
+            plt.tight_layout()
+            plt.savefig(save_path, format='png')
+            plt.close()
+            print(f'Saved plot to {save_path}')
+        else:
+            plt.show()
 
     def explain(
         self, X: pd.DataFrame, effect_size: Optional[float] = None

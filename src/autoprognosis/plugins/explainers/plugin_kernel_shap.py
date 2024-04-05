@@ -6,6 +6,7 @@ from typing import Any, List, Optional
 import numpy as np
 import pandas as pd
 import shap
+import matplotlib.pyplot as plt
 
 # autoprognosis absolute
 from autoprognosis.plugins.explainers.base import ExplainerPlugin
@@ -120,9 +121,20 @@ class KernelSHAPPlugin(ExplainerPlugin):
                 model_fn, X_summary, feature_names=self.feature_names
             )
 
-    def plot(self, X: pd.DataFrame) -> None:  # type: ignore
+    def plot(self, X: pd.DataFrame, save_path: Optional[str] = None) -> None:  # type: ignore
         shap_values = self.explainer.shap_values(X)
         shap.summary_plot(shap_values, X)
+        if save_path:
+            # Ensure the layout is adjusted before saving to avoid clipping content
+            plt.tight_layout()
+            # Save the plot to the specified path
+            plt.savefig(save_path, format='png')
+            # Close the plot to free up memory and avoid displaying it in the current session
+            plt.close()
+            print(f'Saving SHAP Explanation to {save_path}')
+        else:
+            # If no save path is provided, display the plot
+            plt.show()
 
     def explain(self, X: pd.DataFrame) -> np.ndarray:
         X = pd.DataFrame(X, columns=self.feature_names)
