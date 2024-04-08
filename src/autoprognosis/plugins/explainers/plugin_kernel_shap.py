@@ -123,10 +123,12 @@ class KernelSHAPPlugin(ExplainerPlugin):
 
     def plot(self, X: pd.DataFrame, save_path: Optional[str] = None) -> None:  # type: ignore
         shap_values = self.explainer.shap_values(X)
-        shap.summary_plot(shap_values, X)
+
+        shap.summary_plot(shap_values, X, show=False)
         if save_path:
             # Ensure the layout is adjusted before saving to avoid clipping content
             plt.tight_layout()
+
             # Save the plot to the specified path
             plt.savefig(save_path, format='png')
             # Close the plot to free up memory and avoid displaying it in the current session
